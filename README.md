@@ -68,4 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# postapp
+
+# postagram
+
+Introducing Postagram: A Revolutionary Photo Sharing App
+
+Postagram is a groundbreaking photo sharing app that brings a new level of convenience, creativity, and connection to the world of digital photography. With Postagram, capturing and sharing your most cherished moments has never been easier or more enjoyable.
+
+At its core, Postagram is a platform that allows users to effortlessly capture photos and share them with friends. Whether you're an aspiring photographer, a passionate traveler, or simply someone who loves documenting life's beautiful moments, Postagram provides the perfect platform to showcase your creativity and share your stories.
