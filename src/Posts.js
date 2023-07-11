@@ -1,57 +1,49 @@
-// Post.js
+// Posts.js
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { css } from '@emotion/css';
-import { useParams } from 'react-router-dom';
-import { API, Storage } from 'aws-amplify';
-import { getPost } from './graphql/queries';
+import { Link } from 'react-router-dom';
 
-export default function Post() {
-  const [loading, updateLoading] = useState(true);
-  const [post, updatePost] = useState(null);
-  const { id } = useParams()
-  useEffect(() => {
-    fetchPost()
-  }, [])
-  async function fetchPost() {
-    try {
-      const postData = await API.graphql({
-        query: getPost, variables: { id }
-      });
-      const currentPost = postData.data.getPost
-      const image = await Storage.get(currentPost.image);
-
-      currentPost.image = image;
-      updatePost(currentPost);
-      updateLoading(false);
-    } catch (err) {
-      console.log('error: ', err)
-    }
-  }
-  if (loading) return <h3>Loading...</h3>
-  console.log('post: ', post)
+export default function Posts({
+  posts = []
+}) {
   return (
     <>
-      <h1 className={titleStyle}>{post.name}</h1>
-      <h3 className={locationStyle}>{post.location}</h3>
-      <p>{post.description}</p>
-      <img alt="post" src={post.image} className={imageStyle} />
+      <h1>Posts</h1>
+      {
+        posts.map(post => (
+          <Link to={`/post/${post.id}`} className={linkStyle} key={post.id}>
+            <div key={post.id} className={postContainer}>
+              <h1 className={postTitleStyle}>{post.name}</h1>
+              <img alt="post" className={imageStyle} src={post.image} />
+            </div>
+          </Link>
+        ))
+      }
     </>
   )
 }
 
-const titleStyle = css`
-  margin-bottom: 7px;
+const postTitleStyle = css`
+  margin: 15px 0px;
+  color: #0070f3;
 `
 
-const locationStyle = css`
-  color: #0070f3;
-  margin: 0;
+const linkStyle = css`
+  text-decoration: none;
+`
+
+const postContainer = css`
+  border-radius: 10px;
+  padding: 1px 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  \:hover {
+    border-color: #0070f3;
+  }
 `
 
 const imageStyle = css`
-  max-width: 500px;
-  @media (max-width: 500px) {
-    width: 100%;
-  }
+  width: 100%;
+  max-width: 400px;
 `
